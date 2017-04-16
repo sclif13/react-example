@@ -19,11 +19,7 @@ class App extends Component {
   handlerClick = e => {
     e.preventDefault();
     const { pushStateApp, pushStateFigure } = this.props;
-    if (e.target.className === "App") {
-      pushStateApp(e.clientX, e.clientY);
-    } else if (e.target.className === "Figure" && e.target.id) {
-      pushStateFigure(e.target.id);
-    }
+    pushStateApp(e.clientX, e.clientY);
   }
 }
 
