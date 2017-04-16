@@ -1,14 +1,15 @@
 const initialState = {
-    isActive: false
+    items : []
 };
 
 export default function configReducer(state = initialState, action) {
     switch (action.type) {
-        case 'APP_CLICK': {
-            return { isActive: action.isActive }
+        case 'ADD_FIGURE': {
+            return { items : [...state.items, action.item] }
         }
-        case 'FIGURE_CLICK': {
-            return { isActive: action.isActive }
+        case 'DELETE_FIGURE': {
+            state.items.splice(action.id, 1)
+            return { items : [...state.items] }
         }
     }
     return state;

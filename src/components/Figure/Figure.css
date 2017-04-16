@@ -1,4 +1,3 @@
 .Figure {
-    margin: auto;
-    position: relative;
+    position: fixed;
 }

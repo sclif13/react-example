@@ -7,25 +7,28 @@ import { bindActionCreators } from 'redux'
 
 class App extends Component {
   render() {
-    const { isActive, pushStateFigure } = this.props;
+    const { items, pushStateFigure } = this.props;
     return (
       <div className="App" onClick={this.handlerClick}>
-        <Figure isActive={isActive} pushStateFigure={pushStateFigure} />
+        {items.map((item, index) => {
+          return (<Figure key={index} id={index} styles={item.styles} pushStateFigure={pushStateFigure} />)
+        })}
       </div>
     );
   }
   handlerClick = e => {
     e.preventDefault();
-    const { isActive, pushStateApp } = this.props;
-    if (isActive) {
-      return;
+    const { pushStateApp, pushStateFigure } = this.props;
+    if (e.target.className === "App") {
+      pushStateApp(e.clientX, e.clientY);
+    } else if (e.target.className === "Figure" && e.target.id) {
+      pushStateFigure(e.target.id);
     }
-    pushStateApp();
   }
 }
 
 const mapStateToProps = (state, props) => {
-    return { ...state.config }
+  return { ...state.config }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
